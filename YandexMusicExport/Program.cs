@@ -147,22 +147,22 @@ internal static class Program
 
 internal class PlaylistResponse
 {
-    public PlaylistData Playlist { get; set; }
+    public required PlaylistData Playlist { get; set; }
 }
 
 internal class PlaylistData
 {
-    public string Title { get; set; }
-    public Track[] Tracks { get; set; }
+    public required string Title { get; set; }
+    public required Track[] Tracks { get; set; }
 }
 
 internal class Track
 {
-    public string Title { get; set; }
-    public Artist[] Artists { get; set; }
+    public required string Title { get; set; }
+    public required Artist[] Artists { get; set; }
 }
 
 internal class Artist
 {
-    public string Name { get; set; }
+    public required string Name { get; set; }
 }
