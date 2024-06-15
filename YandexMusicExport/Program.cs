@@ -39,6 +39,11 @@ internal static class Program
             Console.Write(
                 "Введите ссылку на плейлист Яндекс Музыки >>> ");
             var uriRaw = Console.ReadLine();
+            if (uriRaw == null)
+            {
+                return;
+            }
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Обработка...\n");
             Console.ResetColor();
