@@ -29,7 +29,7 @@ internal static class Program
         var owner = inputUri.Segments[2].Trim('/');
         var kinds = inputUri.Segments[4].Trim('/');
 
-        var uri = $"https://music.yandex.ru/handlers/playlist.jsx?owner={owner}&kinds={kinds}";
+        var uri = MakeUri(owner, kinds);
 
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Обработка...");
@@ -66,6 +66,11 @@ internal static class Program
         Console.WriteLine($"Список треков распечатан ниже и сохранен рядом с файлом программы (файл {playlist.Title}.txt).");
 
         Process.Start(new ProcessStartInfo($"{playlist.Title}.txt") { UseShellExecute = true });
+
+        static Uri MakeUri(string owner, string kinds)
+        {
+            return new Uri($"https://music.yandex.ru/handlers/playlist.jsx?owner={owner}&kinds={kinds}");
+        }
     }
 
     private static void Greet()
