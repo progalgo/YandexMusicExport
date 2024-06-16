@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace YandexMusicExport;
@@ -34,8 +35,18 @@ internal static class Program
         Console.WriteLine("Обработка...");
         Console.ResetColor();
 
-        var client = new WebClient();
-        var response = JsonSerializer.Deserialize<PlaylistResponse>(client.OpenRead(uri), new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+        var client = new HttpClient();
+
+        if (client.GetFromJsonAsync(
+            uri,
+            typeof(PlaylistResponse),
+            new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            }).Result is not PlaylistResponse response)
+        {
+            return;
+        }
 
         Playlist playlist = response.Playlist;
 
