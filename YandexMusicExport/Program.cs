@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -36,14 +35,8 @@ internal static class Program
         Console.ResetColor();
 
         var client = new HttpClient();
-
-        if (client.GetFromJsonAsync(
-            uri,
-            typeof(PlaylistResponse),
-            new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            }).Result is not PlaylistResponse response)
+        var response = client.GetFromJsonAsync<PlaylistResponse>(uri, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }).Result;
+        if (response == null)
         {
             return;
         }
